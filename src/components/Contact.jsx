@@ -1,68 +1,144 @@
-import React from 'react';
-import '../App.css'; // Import the consolidated CSS file
+import React, { useState } from 'react';
+import { Mail, Linkedin, Github, Calendar, ExternalLink } from 'lucide-react';
+import { CALENDLY_URL } from '../constants/data';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Thanks for reaching out!");
+    setFormData({ name: '', email: '', message: '' });
+  };
+
   return (
-    <section id="contact" className="contact-section">
-      <div className="container">
-        <h2 className="section-title">Get In Touch</h2>
+    <section id="contact" className="py-20 bg-slate-900">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-12">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-100 mb-6">Let's Connect</h2>
+            <p className="text-slate-400 mb-8 text-lg">
+              I am eager to bring my strong academic background and self-taught practical skills to a junior developer role. I am a quick learner, disciplined, and ready to work.
+            </p>
+            
+            {/* Calendly Integration Card */}
+            <div className="mb-8 p-6 bg-violet-900/20 border border-violet-500/30 rounded-xl hover:border-violet-500/50 transition-all">
+              <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                <Calendar className="text-violet-400" /> 
+                Schedule a Meeting
+              </h3>
+              <p className="text-slate-400 mb-4 text-sm">
+                Prefer a real-time discussion? Pick a time slot that works for you.
+              </p>
+              <a 
+                href={CALENDLY_URL} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-full px-4 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors font-medium gap-2 shadow-lg shadow-violet-900/20"
+              >
+                Book a Call <ExternalLink size={16} />
+              </a>
+            </div>
 
-        <div className="contact-content">
-          <p className="contact-intro">
-            I'm always open to new opportunities, collaborations, and interesting discussions. Whether you have a question, a project idea, or just want to say hi, feel free to reach out!
-          </p>
-
-          <div className="contact-details-grid">
-            <div className="detail-item">
-              <i className="fas fa-map-marker-alt detail-icon"></i>
-              <h3>Location</h3>
-              <p>Hawassa, Ethiopia</p>
-            </div>
-            <div className="detail-item">
-              <i className="fas fa-envelope detail-icon"></i>
-              <h3>Email</h3>
-              <p><a href="mailto:hailemichaelkidist@gmail.com">hailemichaelkidist@gmail.com</a></p> 
-            </div>
-            <div className="detail-item">
-              <i className="fas fa-phone-alt detail-icon"></i>
-              <h3>Phone</h3>
-              <p><a href="tel:+251984180404">+251 984180404</a></p> 
-            </div>
-            <div className="detail-item">
-              <i className="fab fa-linkedin detail-icon"></i>
-              <h3>LinkedIn</h3>
-              <p><a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">Your LinkedIn Profile</a></p> {/* Replace with your LinkedIn */}
-            </div>
-          </div>
-
-          <div className="contact-form-container">
-            <h3>Send Me a Message</h3>
-            <form className="contact-form" action="YOUR_FORM_SUBMISSION_ENDPOINT" method="POST">
-              {/* Replace YOUR_FORM_SUBMISSION_ENDPOINT with a service like Formspree, Netlify Forms, or your own backend */}
-              
-              {/* New: Group Name and Email for horizontal layout */}
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="name">Name</label>
-                  <input type="text" id="name" name="name" placeholder="Your Name" required />
+            <div className="space-y-6">
+              {/* Email */}
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-violet-400">
+                  <Mail size={20} />
                 </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input type="email" id="email" name="email" placeholder="Your Email" required />
+                <div>
+                  <p className="text-sm text-slate-500">Email Me</p>
+                  <a
+                    href="mailto:hailemichaelkidist@gmail.com"
+                    className="text-slate-200 font-medium hover:underline"
+                  >
+                    hailemichaelkidist@gmail.com
+                  </a>
                 </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="subject">Subject</label>
-                <input type="text" id="subject" name="subject" placeholder="Subject of your message" />
+              {/* LinkedIn */}
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-violet-400">
+                  <Linkedin size={20} />
+                </div>
+                <div>
+                  <p className="text-sm text-slate-500">LinkedIn</p>
+                  <a
+                    href="https://www.linkedin.com/in/kidist-hailemichael-713316331/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-200 font-medium hover:underline"
+                  >
+                    linkedin
+                  </a>
+                </div>
               </div>
-              <div className="form-group">
-                <label htmlFor="message">Message</label>
-                <textarea id="message" name="message" rows="6" placeholder="Your message..." required></textarea>
+
+              {/* GitHub */}
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-violet-400">
+                  <Github size={20} />
+                </div>
+                <div>
+                  <p className="text-sm text-slate-500">GitHub</p>
+                  <a
+                    href="https://github.com/we-BAK"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-200 font-medium hover:underline"
+                  >
+                    Github
+                  </a>
+                </div>
               </div>
-              <button type="submit" className="submit-btn">Send Message <i className="fas fa-paper-plane"></i></button>
-            </form>
+            </div>
           </div>
+
+          {/* Contact Form */}
+          <form onSubmit={handleSubmit} className="bg-slate-950 p-8 rounded-2xl border border-slate-800">
+            <div className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-slate-400 mb-2">Name</label>
+                <input 
+                  type="text" 
+                  required
+                  className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none text-slate-200 transition-all"
+                  placeholder="Your Name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-400 mb-2">Email</label>
+                <input 
+                  type="email" 
+                  required
+                  className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none text-slate-200 transition-all"
+                  placeholder="recruiter@company.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-400 mb-2">Message</label>
+                <textarea 
+                  rows={4}
+                  required
+                  className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none text-slate-200 transition-all resize-none"
+                  placeholder="Hi, I'd like to discuss a Junior Developer role..."
+                  value={formData.message}
+                  onChange={(e) => setFormData({...formData, message: e.target.value})}
+                ></textarea>
+              </div>
+              <button 
+                type="submit" 
+                className="w-full py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-medium rounded-lg hover:opacity-90 transition-opacity shadow-lg shadow-violet-500/25"
+              >
+                Send Message
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </section>
