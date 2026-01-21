@@ -3,7 +3,8 @@ import { Globe, Database, Cpu, Code2, GraduationCap } from "lucide-react";
 export const CALENDLY_URL = "https://calendly.com/kidy1924";
 import ALP from '../assets/Autistic.png'
 import KL from '../assets/KidsLearn.png'
-import WaveExplorer from '../assets/Wave.png'
+import water from '../assets/water.png' 
+import portifolio from '../assets/portifolio.png'
 
 export const SKILLS = [
   {
@@ -40,21 +41,31 @@ export const PROJECTS = [
     description:
       "An educational platform designed to teach frontend web development skills to children aged 7–14. Includes interactive lessons, coding exercises, and project-based learning to make programming engaging and accessible for young learners.",
     tags: ["React", "HTML", "CSS", "JavaScript", "Frontend"],
-    link: "#",
+    link: "http://kids-learn-beige.vercel.app",
     github: "#",
     image: KL,
+  },
+  {
+    id: 3,
+    title: "A management system for a water distribution company",
+    description:
+      "A web application that tracks water distribution from stock to customers, managing inventory, sales, and user roles to ensure efficient and transparent operations.",
+    tags: ["React", "JavaScript", "Tailwind", "Education"],
+    link: "https://amesigin.vercel.app/",
+    github: "#",
+    image: water, // make sure to import your image at the top
   },
   
   
   {
     id: 3,
-    title: "Wave Explorer",
+    title: "portifolio",
     description:
-      "A React-based educational platform that teaches users about waves. Features sections on transverse and longitudinal waves, interactive quizzes, and an About page to explain wave concepts in an engaging, user-friendly way.",
+      "A curated showcase of my professional journey, featuring the projects, skills, and creative solutions I’ve delivered for clients and brands",
     tags: ["React", "JavaScript", "Tailwind", "Education"],
     link: "#",
     github: "#",
-    image: WaveExplorer, // make sure to import your image at the top
+    image: portifolio, // make sure to import your image at the top
   },
   
 ];

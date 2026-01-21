@@ -1,14 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import { Mail, Linkedin, Github, Calendar, ExternalLink } from 'lucide-react';
 import { CALENDLY_URL } from '../constants/data';
 
 const Contact = () => {
+  const formRef = useRef();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  
+  const [isSending, setIsSending] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Thanks for reaching out!");
-    setFormData({ name: '', email: '', message: '' });
+    setIsSending(true);
+
+    emailjs
+      .sendForm(
+        "service_87r9pyr",
+        "template_h6mix4s",
+        formRef.current,
+        "AcIdPA8LMdixDTOJa"
+      )
+      .then(
+        () => {
+          alert("Message sent successfully!");
+          setFormData({ name: '', email: '', message: '' });
+          setIsSending(false);
+        },
+        (error) => {
+          console.error("Failed to send message:", error);
+          alert("Failed to send message. Please try again.");
+          setIsSending(false);
+        }
+      );
   };
 
   return (
@@ -20,7 +42,7 @@ const Contact = () => {
             <p className="text-slate-400 mb-8 text-lg">
               I am eager to bring my strong academic background and self-taught practical skills to a junior developer role. I am a quick learner, disciplined, and ready to work.
             </p>
-            
+
             {/* Calendly Integration Card */}
             <div className="mb-8 p-6 bg-violet-900/20 border border-violet-500/30 rounded-xl hover:border-violet-500/50 transition-all">
               <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
@@ -41,7 +63,6 @@ const Contact = () => {
             </div>
 
             <div className="space-y-6">
-              {/* Email */}
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-violet-400">
                   <Mail size={20} />
@@ -57,7 +78,6 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* LinkedIn */}
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-violet-400">
                   <Linkedin size={20} />
@@ -75,7 +95,6 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* GitHub */}
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-violet-400">
                   <Github size={20} />
@@ -96,12 +115,13 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="bg-slate-950 p-8 rounded-2xl border border-slate-800">
+          <form ref={formRef} onSubmit={handleSubmit} className="bg-slate-950 p-8 rounded-2xl border border-slate-800">
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-slate-400 mb-2">Name</label>
                 <input 
                   type="text" 
+                  name="name"
                   required
                   className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none text-slate-200 transition-all"
                   placeholder="Your Name"
@@ -109,10 +129,12 @@ const Contact = () => {
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-slate-400 mb-2">Email</label>
                 <input 
                   type="email" 
+                  name="email"
                   required
                   className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none text-slate-200 transition-all"
                   placeholder="recruiter@company.com"
@@ -120,10 +142,12 @@ const Contact = () => {
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-slate-400 mb-2">Message</label>
                 <textarea 
                   rows={4}
+                  name="message"
                   required
                   className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none text-slate-200 transition-all resize-none"
                   placeholder="Hi, I'd like to discuss a Junior Developer role..."
@@ -131,14 +155,17 @@ const Contact = () => {
                   onChange={(e) => setFormData({...formData, message: e.target.value})}
                 ></textarea>
               </div>
+
               <button 
                 type="submit" 
+                disabled={isSending}
                 className="w-full py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-medium rounded-lg hover:opacity-90 transition-opacity shadow-lg shadow-violet-500/25"
               >
-                Send Message
+                {isSending ? "Sending..." : "Send Message"}
               </button>
             </div>
           </form>
+
         </div>
       </div>
     </section>
