@@ -31,8 +31,8 @@ export const PROJECTS = [
     description:
       "A platform designed to connect parents with therapists, manage student profiles, assign therapy tasks, and support communication. Built with a full-stack architecture and integrates Supabase for authentication and database management.",
     tags: ["React", "Supabase", "Full Stack", "Node.js"],
-    link: "#",
-    github: "#",
+    link: "https://learning-platform-eight-sandy.vercel.app/",
+    github: "https://github.com/we-BAK/Learning_platform",
     image: ALP,
   },
   {
@@ -42,7 +42,7 @@ export const PROJECTS = [
       "An educational platform designed to teach frontend web development skills to children aged 7–14. Includes interactive lessons, coding exercises, and project-based learning to make programming engaging and accessible for young learners.",
     tags: ["React", "HTML", "CSS", "JavaScript", "Frontend"],
     link: "http://kids-learn-beige.vercel.app",
-    github: "#",
+    github: "https://github.com/abyssinia12/KidsLearn",
     image: KL,
   },
   {
@@ -52,8 +52,8 @@ export const PROJECTS = [
       "A web application that tracks water distribution from stock to customers, managing inventory, sales, and user roles to ensure efficient and transparent operations.",
     tags: ["React", "JavaScript", "Tailwind", "Education"],
     link: "https://amesigin.vercel.app/",
-    github: "#",
-    image: water, // make sure to import your image at the top
+    github: "https://github.com/we-BAK/waterdistributor",
+    image: water,
   },
   
   
