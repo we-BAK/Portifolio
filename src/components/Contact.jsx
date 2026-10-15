@@ -1,175 +1,248 @@
-import React, { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { Mail, Linkedin, Github, Calendar, ExternalLink } from 'lucide-react';
-import { CALENDLY_URL } from '../constants/data';
+import { Mail, Phone, MapPin, Calendar, Github, Linkedin, Send, Copy, Check, Sparkles, MessageSquare } from 'lucide-react';
+import { PROFILE } from '../constants/data';
+import SectionTitle from './SectionTitle';
 
-const Contact = () => {
+export default function Contact() {
   const formRef = useRef();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState('');
+  const [sending, setSending] = useState(false);
+  const [copiedField, setCopiedField] = useState(null);
 
-  const handleSubmit = (e) => {
+  const copyToClipboard = (text, field) => {
+    navigator.clipboard.writeText(text);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(null), 2500);
+  };
+
+  const onSubmit = (e) => {
     e.preventDefault();
-    setIsSending(true);
-
+    setSending(true);
+    setStatus('');
+    
+    // EmailJS credentials preserved
     emailjs
-      .sendForm(
-        "service_87r9pyr",
-        "template_h6mix4s",
-        formRef.current,
-        "AcIdPA8LMdixDTOJa"
-      )
-      .then(
-        () => {
-          alert("Message sent successfully!");
-          setFormData({ name: '', email: '', message: '' });
-          setIsSending(false);
-        },
-        (error) => {
-          console.error("Failed to send message:", error);
-          alert("Failed to send message. Please try again.");
-          setIsSending(false);
-        }
-      );
+      .sendForm('service_87r9pyr', 'template_h6mix4s', formRef.current, 'AcIdPA8LMdixDTOJa')
+      .then(() => {
+        setStatus({ ok: true, msg: 'Thank you! Your message was sent successfully. I will get back to you shortly.' });
+        setFormData({ name: '', email: '', message: '' });
+      })
+      .catch(() => {
+        setStatus({ ok: false, msg: 'Transmission issue encountered. Please email me directly at hailemichaelkidist@gmail.com' });
+      })
+      .finally(() => setSending(false));
   };
 
   return (
-    <section id="contact" className="py-20 bg-slate-900">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-100 mb-6">Let's Connect</h2>
-            <p className="text-slate-400 mb-8 text-lg">
-              I am eager to bring my strong academic background and self-taught practical skills to a junior developer role. I am a quick learner, disciplined, and ready to work.
-            </p>
+    <section id="contact" className="py-20 md:py-28 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <SectionTitle
+          eyebrow="Initiate Collaboration"
+          title="Let’s discuss your next software engineering opportunity."
+          copy="Based in Hawassa, Ethiopia. Open to junior software developer, full-stack, backend, and frontend engineering roles across remote and on-site teams."
+        />
 
-            {/* Calendly Integration Card */}
-            <div className="mb-8 p-6 bg-violet-900/20 border border-violet-500/30 rounded-xl hover:border-violet-500/50 transition-all">
-              <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                <Calendar className="text-violet-400" /> 
-                Schedule a Meeting
+        <div className="grid lg:grid-cols-12 gap-10 items-start">
+          
+          {/* Left Column: Direct Reachout Channels */}
+          <div className="lg:col-span-5 space-y-6">
+            
+            <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-slate-800 shadow-xl space-y-5">
+              <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                <MessageSquare className="text-cyan-400" size={20} />
+                <span>Direct Contact Channels</span>
               </h3>
-              <p className="text-slate-400 mb-4 text-sm">
-                Prefer a real-time discussion? Pick a time slot that works for you.
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                Feel free to email, call, book a discovery meeting, or connect directly through GitHub and LinkedIn.
               </p>
-              <a 
-                href={CALENDLY_URL} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-full px-4 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors font-medium gap-2 shadow-lg shadow-violet-900/20"
-              >
-                Book a Call <ExternalLink size={16} />
-              </a>
+
+              {/* Email Card with Copy button */}
+              <div className="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800/80 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3 overflow-hidden">
+                  <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 shrink-0">
+                    <Mail size={16} />
+                  </div>
+                  <div className="truncate">
+                    <p className="text-[11px] font-mono text-slate-400">Direct Email</p>
+                    <a href={`mailto:${PROFILE.email}`} className="text-xs sm:text-sm font-semibold text-white hover:text-cyan-300 truncate block">
+                      {PROFILE.email}
+                    </a>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => copyToClipboard(PROFILE.email, 'email')}
+                  className="p-2 text-slate-400 hover:text-white rounded-lg bg-slate-800 hover:bg-slate-700 shrink-0"
+                  title="Copy Email"
+                >
+                  {copiedField === 'email' ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+                </button>
+              </div>
+
+              {/* Phone Card with Copy button */}
+              <div className="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800/80 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 shrink-0">
+                    <Phone size={16} />
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-mono text-slate-400">Direct Phone</p>
+                    <a href={PROFILE.phoneHref} className="text-xs sm:text-sm font-semibold text-white hover:text-cyan-300">
+                      {PROFILE.phone}
+                    </a>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => copyToClipboard(PROFILE.phone, 'phone')}
+                  className="p-2 text-slate-400 hover:text-white rounded-lg bg-slate-800 hover:bg-slate-700 shrink-0"
+                  title="Copy Phone"
+                >
+                  {copiedField === 'phone' ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+                </button>
+              </div>
+
+              {/* Location Card */}
+              <div className="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800/80 flex items-center gap-3">
+                <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 shrink-0">
+                  <MapPin size={16} />
+                </div>
+                <div>
+                  <p className="text-[11px] font-mono text-slate-400">Location Base</p>
+                  <p className="text-xs sm:text-sm font-semibold text-white">{PROFILE.location}</p>
+                </div>
+              </div>
+
+              {/* Action Buttons: Calendly + Profiles */}
+              <div className="pt-2 flex flex-col gap-2.5">
+                <a
+                  href={PROFILE.calendly}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-semibold text-xs shadow-md shadow-cyan-500/20 transition-all"
+                >
+                  <Calendar size={15} /> Book a Discovery Call
+                </a>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <a
+                    href={PROFILE.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs font-medium text-slate-300 hover:text-white transition-colors"
+                  >
+                    <Linkedin size={15} className="text-cyan-400" /> LinkedIn
+                  </a>
+                  <a
+                    href={PROFILE.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs font-medium text-slate-300 hover:text-white transition-colors"
+                  >
+                    <Github size={15} className="text-cyan-400" /> GitHub
+                  </a>
+                </div>
+              </div>
+
             </div>
 
-            <div className="space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-violet-400">
-                  <Mail size={20} />
-                </div>
-                <div>
-                  <p className="text-sm text-slate-500">Email Me</p>
-                  <a
-                    href="mailto:hailemichaelkidist@gmail.com"
-                    className="text-slate-200 font-medium hover:underline"
-                  >
-                    hailemichaelkidist@gmail.com
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-violet-400">
-                  <Linkedin size={20} />
-                </div>
-                <div>
-                  <p className="text-sm text-slate-500">LinkedIn</p>
-                  <a
-                    href="https://www.linkedin.com/in/kidist-hailemichael-713316331/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-slate-200 font-medium hover:underline"
-                  >
-                    linkedin
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-violet-400">
-                  <Github size={20} />
-                </div>
-                <div>
-                  <p className="text-sm text-slate-500">GitHub</p>
-                  <a
-                    href="https://github.com/we-BAK"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-slate-200 font-medium hover:underline"
-                  >
-                    Github
-                  </a>
-                </div>
-              </div>
-            </div>
           </div>
 
-          {/* Contact Form */}
-          <form ref={formRef} onSubmit={handleSubmit} className="bg-slate-950 p-8 rounded-2xl border border-slate-800">
-            <div className="space-y-6">
+          {/* Right Column: Contact Message Form */}
+          <div className="lg:col-span-7">
+            <form
+              ref={formRef}
+              onSubmit={onSubmit}
+              className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-slate-800 shadow-xl space-y-5"
+            >
+              <h3 className="text-xl font-bold text-white mb-2">Send an Instant Inquiry</h3>
+
               <div>
-                <label className="block text-sm font-medium text-slate-400 mb-2">Name</label>
-                <input 
-                  type="text" 
+                <label htmlFor="name" className="block text-xs font-mono font-medium text-slate-300 mb-1.5">
+                  YOUR FULL NAME
+                </label>
+                <input
+                  id="name"
                   name="name"
+                  type="text"
                   required
-                  className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none text-slate-200 transition-all"
-                  placeholder="Your Name"
+                  placeholder="e.g. John Doe / Tech Lead"
                   value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-400 mb-2">Email</label>
-                <input 
-                  type="email" 
+                <label htmlFor="email" className="block text-xs font-mono font-medium text-slate-300 mb-1.5">
+                  EMAIL ADDRESS
+                </label>
+                <input
+                  id="email"
                   name="email"
+                  type="email"
                   required
-                  className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none text-slate-200 transition-all"
-                  placeholder="recruiter@company.com"
+                  placeholder="e.g. recruiter@company.com"
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-400 mb-2">Message</label>
-                <textarea 
-                  rows={4}
+                <label htmlFor="message" className="block text-xs font-mono font-medium text-slate-300 mb-1.5">
+                  MESSAGE OR ROLE OPPORTUNITY
+                </label>
+                <textarea
+                  id="message"
                   name="message"
+                  rows={5}
                   required
-                  className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none text-slate-200 transition-all resize-none"
-                  placeholder="Hi, I'd like to discuss a Junior Developer role..."
+                  placeholder="Describe your role requirements, team stack, or project scope..."
                   value={formData.message}
-                  onChange={(e) => setFormData({...formData, message: e.target.value})}
-                ></textarea>
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors resize-none"
+                />
               </div>
 
-              <button 
-                type="submit" 
-                disabled={isSending}
-                className="w-full py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-medium rounded-lg hover:opacity-90 transition-opacity shadow-lg shadow-violet-500/25"
+              <button
+                type="submit"
+                disabled={sending}
+                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold text-sm shadow-lg shadow-cyan-500/20 transition-all disabled:opacity-60 flex items-center justify-center gap-2 cursor-pointer"
               >
-                {isSending ? "Sending..." : "Send Message"}
+                {sending ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span>Transmitting Message...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send size={16} />
+                    <span>Transmit Message</span>
+                  </>
+                )}
               </button>
-            </div>
-          </form>
+
+              {status && (
+                <div
+                  className={`p-3 rounded-xl text-xs font-mono border ${
+                    status.ok
+                      ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+                      : 'bg-rose-500/10 border-rose-500/30 text-rose-300'
+                  }`}
+                >
+                  {status.msg}
+                </div>
+              )}
+            </form>
+          </div>
 
         </div>
+
       </div>
     </section>
   );
-};
-
-export default Contact;
+}

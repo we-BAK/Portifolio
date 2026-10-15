@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750">
+  <defs>
+    <linearGradient id="p-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="p-card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="p-accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#p-bg)"/>
+
+  <!-- Top Window Header Bar -->
+  <rect x="0" y="0" width="1200" height="52" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <circle cx="30" cy="26" r="6" fill="#ef4444"/>
+  <circle cx="50" cy="26" r="6" fill="#f59e0b"/>
+  <circle cx="70" cy="26" r="6" fill="#10b981"/>
+  <rect x="350" y="14" width="500" height="24" rx="6" fill="#1e293b"/>
+  <text x="600" y="30" text-anchor="middle" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="12">
+    https://parish-portal.local/admin/dashboard (ASP.NET MVC + MySQL)
+  </text>
+
+  <!-- Sidebar -->
+  <rect x="0" y="52" width="240" height="698" fill="#0b1120" stroke="#1e293b" stroke-width="1"/>
+  <text x="32" y="100" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="18">Parish Core</text>
+  <text x="32" y="120" fill="#6366f1" font-family="'JetBrains Mono', monospace" font-size="11">ROLE: ADMINISTRATOR</text>
+
+  <!-- Nav items -->
+  <rect x="20" y="150" width="200" height="38" rx="8" fill="url(#p-accent)"/>
+  <text x="50" y="174" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="13">&#9670; Dashboard Overview</text>
+  <text x="50" y="220" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">&#9672; Members Directory</text>
+  <text x="50" y="260" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">&#9672; Priest Schedules</text>
+  <text x="50" y="300" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">&#9672; Sacraments &amp; Records</text>
+  <text x="50" y="340" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">&#9672; Financial Reports</text>
+  <text x="50" y="380" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">&#9672; RBAC Permissions</text>
+
+  <!-- Main Content Area -->
+  <g transform="translate(270, 75)">
+    <!-- Header info -->
+    <text x="0" y="30" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="24">Church Operations &amp; Registry</text>
+    <text x="0" y="52" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">Enterprise Parish Management • ASP.NET MVC • MySQL Relational Database</text>
+
+    <!-- Stat Metric Cards -->
+    <g transform="translate(0, 80)">
+      <!-- Card 1 -->
+      <rect x="0" y="0" width="205" height="110" rx="12" fill="url(#p-card)" stroke="#1e293b" stroke-width="1.5"/>
+      <text x="20" y="36" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">ACTIVE PARISHIONERS</text>
+      <text x="20" y="74" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28">2,480</text>
+      <text x="20" y="94" fill="#10b981" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">+12% this quarter</text>
+
+      <!-- Card 2 -->
+      <rect x="225" y="0" width="205" height="110" rx="12" fill="url(#p-card)" stroke="#1e293b" stroke-width="1.5"/>
+      <text x="245" y="36" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">SACRAMENT RECORDS</text>
+      <text x="245" y="74" fill="#818cf8" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28">1,142</text>
+      <text x="245" y="94" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">Baptisms, Weddings &amp; Rites</text>
+
+      <!-- Card 3 -->
+      <rect x="450" y="0" width="205" height="110" rx="12" fill="url(#p-card)" stroke="#1e293b" stroke-width="1.5"/>
+      <text x="470" y="36" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">PRIESTS &amp; STAFF</text>
+      <text x="470" y="74" fill="#38bdf8" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28">18</text>
+      <text x="470" y="94" fill="#10b981" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">Active duty rosters</text>
+
+      <!-- Card 4 -->
+      <rect x="675" y="0" width="205" height="110" rx="12" fill="url(#p-card)" stroke="#1e293b" stroke-width="1.5"/>
+      <text x="695" y="36" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">SECURITY STATUS</text>
+      <text x="695" y="74" fill="#10b981" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="24">RBAC Active</text>
+      <text x="695" y="94" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">Role-based privileges</text>
+    </g>
+
+    <!-- Table preview -->
+    <g transform="translate(0, 220)">
+      <rect x="0" y="0" width="880" height="380" rx="12" fill="url(#p-card)" stroke="#1e293b" stroke-width="1.5"/>
+      <text x="24" y="36" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="16">Recent Parish Registry Transactions</text>
+      
+      <!-- Table Header -->
+      <rect x="24" y="55" width="832" height="36" rx="6" fill="#0f172a"/>
+      <text x="40" y="78" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600">MEMBER ID</text>
+      <text x="180" y="78" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600">PARISHIONER NAME</text>
+      <text x="400" y="78" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600">MODULE / EVENT</text>
+      <text x="590" y="78" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600">ASSIGNED PRIEST</text>
+      <text x="750" y="78" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600">STATUS</text>
+
+      <!-- Row 1 -->
+      <text x="40" y="125" fill="#e2e8f0" font-family="'JetBrains Mono', monospace" font-size="12">#PR-8921</text>
+      <text x="180" y="125" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">Abebe Tadesse</text>
+      <text x="400" y="125" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">Baptism Certificate Issued</text>
+      <text x="590" y="125" fill="#e2e8f0" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">Fr. Gebriel</text>
+      <rect x="750" y="108" width="80" height="24" rx="12" fill="#065f46"/>
+      <text x="790" y="124" text-anchor="middle" fill="#6ee7b7" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700">Verified</text>
+
+      <!-- Row 2 -->
+      <line x1="24" y1="145" x2="856" y2="145" stroke="#334155" stroke-width="0.5"/>
+      <text x="40" y="180" fill="#e2e8f0" font-family="'JetBrains Mono', monospace" font-size="12">#PR-8922</text>
+      <text x="180" y="180" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">Marta Haile</text>
+      <text x="400" y="180" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">Community Support Request</text>
+      <text x="590" y="180" fill="#e2e8f0" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">Fr. Tekle</text>
+      <rect x="750" y="163" width="80" height="24" rx="12" fill="#1e3a8a"/>
+      <text x="790" y="179" text-anchor="middle" fill="#93c5fd" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700">In Review</text>
+
+      <!-- Row 3 -->
+      <line x1="24" y1="200" x2="856" y2="200" stroke="#334155" stroke-width="0.5"/>
+      <text x="40" y="235" fill="#e2e8f0" font-family="'JetBrains Mono', monospace" font-size="12">#PR-8923</text>
+      <text x="180" y="235" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">Dawit Yohannes</text>
+      <text x="400" y="235" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">Annual Parish Contribution</text>
+      <text x="590" y="235" fill="#e2e8f0" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">Finance Dept</text>
+      <rect x="750" y="218" width="80" height="24" rx="12" fill="#065f46"/>
+      <text x="790" y="234" text-anchor="middle" fill="#6ee7b7" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700">Logged</text>
+
+      <!-- Schema & SQL Footnote -->
+      <rect x="24" y="280" width="832" height="70" rx="8" fill="#090d16" stroke="#1e293b" stroke-width="1"/>
+      <text x="44" y="310" fill="#6366f1" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600">
+        ASP.NET MVC Controller: AccountsController.cs • Models: ParishMember, RolePermission, SacramentRecord
+      </text>
+      <text x="44" y="332" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="11">
+        Database: MySQL InnoDB Relational Schema • Normalized 3NF • Transactional ACID Guarantees
+      </text>
+    </g>
+  </g>
+</svg>

@@ -1,68 +1,114 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Code, Cpu, Database, Layout } from 'lucide-react';
+import { useState } from 'react';
+import { 
+  Code2, FileCode2, Cpu, Database, Layout, Atom, Server, Layers, 
+  Workflow, Palette, Zap, Network, Terminal, HardDrive, GitBranch, 
+  TerminalSquare, Boxes, Send, Monitor, Share2, Lock, ClipboardCheck, 
+  Box, RefreshCw, Smartphone, Sparkles, Bot, CheckCircle
+} from 'lucide-react';
+import SectionTitle from './SectionTitle';
+import { SKILL_CATEGORIES } from '../constants/data';
 
-// Animation Variants
-const sectionVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+const SKILL_ICONS = {
+  Code2, FileCode2, Cpu, Database, Layout, Atom, Server, Layers,
+  Workflow, Palette, Zap, Network, Terminal, HardDrive, GitBranch,
+  TerminalSquare, Boxes, Send, Monitor, Share2, Lock, ClipboardCheck,
+  Box, RefreshCw, Smartphone, Sparkles, Bot
 };
 
-const cardVariants = {
-  offscreen: { opacity: 0, y: 50 },
-  onscreen: { opacity: 1, y: 0, transition: { type: 'spring', bounce: 0.3, duration: 1 } },
-};
+export default function Skills() {
+  const [activeCategory, setActiveCategory] = useState('All');
 
-// Skills Data
-const SKILLS = [
-  { id: 1, name: 'JavaScript', level: 'Advanced', icon: <Code size={24} /> },
-  { id: 2, name: 'React.js', level: 'Advanced', icon: <Layout size={24} /> },
-  { id: 3, name: 'Node.js', level: 'Intermediate', icon: <Cpu size={24} /> },
-  { id: 4, name: 'SQL / MySQL', level: 'Intermediate', icon: <Database size={24} /> },
-  { id: 5, name: 'HTML / CSS', level: 'Advanced', icon: <Code size={24} /> },
-  { id: 6, name: 'Tailwind CSS', level: 'Advanced', icon: <Layout size={24} /> },
-];
+  const categories = ['All', ...SKILL_CATEGORIES.map((c) => c.category)];
 
-const Skills = () => {
+  const filteredCategories = activeCategory === 'All'
+    ? SKILL_CATEGORIES
+    : SKILL_CATEGORIES.filter((c) => c.category === activeCategory);
+
   return (
-    <motion.section
-      id="skills"
-      className="py-20 bg-gray-50"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={sectionVariants}
-    >
-      <div className="max-w-4xl mx-auto px-6">
-        <motion.h2
-          className="text-3xl font-bold text-gray-900 mb-12 text-center font-manrope"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5 }}
-        >
-          My Skills
-        </motion.h2>
+    <section id="skills" className="py-20 md:py-28 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <SectionTitle
+          eyebrow="Technical Stack & Expertise"
+          title="Battle-tested tools, languages, and architectures."
+          copy="A balanced toolkit spanning modern frontend interfaces, resilient backend servers, relational databases, Linux operations, and AI tooling."
+        />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {SKILLS.map((skill) => (
-            <motion.div
-              key={skill.id}
-              className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:shadow-violet-200 transition-shadow flex flex-col items-center text-center"
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ once: true, amount: 0.5 }}
-              variants={cardVariants}
+        {/* Filter Pills */}
+        <div className="flex flex-wrap gap-2 mb-10 pb-2">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => setActiveCategory(cat)}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
+                activeCategory === cat
+                  ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/25'
+                  : 'bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800 hover:border-slate-700'
+              }`}
             >
-              <div className="text-violet-600 mb-4">{skill.icon}</div>
-              <h3 className="text-xl font-bold text-gray-900 font-manrope">{skill.name}</h3>
-              <p className="text-gray-500 mt-1 text-sm font-inter">{skill.level}</p>
-            </motion.div>
+              {cat}
+            </button>
           ))}
         </div>
-      </div>
-    </motion.section>
-  );
-};
 
-export default Skills;
+        {/* Categories Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredCategories.map((catGroup, idx) => (
+            <div
+              key={idx}
+              className="p-6 rounded-2xl bg-slate-900/70 border border-slate-800/80 hover:border-cyan-500/30 transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-bold text-white text-base tracking-tight">
+                    {catGroup.category}
+                  </h3>
+                  <span className="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/20">
+                    {catGroup.skills.length} skills
+                  </span>
+                </div>
+
+                <p className="text-xs text-slate-400 mb-5 leading-relaxed">
+                  {catGroup.description}
+                </p>
+
+                {/* Skills inside group */}
+                <div className="space-y-2.5">
+                  {catGroup.skills.map((skill, sIdx) => {
+                    const IconComponent = SKILL_ICONS[skill.icon] || CheckCircle;
+                    return (
+                      <div
+                        key={sIdx}
+                        className="flex items-center justify-between p-2.5 rounded-xl bg-slate-950/60 border border-white/5 hover:border-cyan-500/20 hover:bg-slate-950 transition-colors"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <div className="text-cyan-400 p-1 bg-cyan-500/10 rounded-md">
+                            <IconComponent size={15} />
+                          </div>
+                          <span className="text-xs font-medium text-slate-200">
+                            {skill.name}
+                          </span>
+                        </div>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-white/5">
+                          {skill.level}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Bottom decorative bar */}
+              <div className="mt-5 pt-4 border-t border-slate-800/60 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+                <span>Verified in production</span>
+                <span className="text-emerald-400">● Active</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+}

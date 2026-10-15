@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="840" viewBox="0 0 1200 840">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a192f"/>
+      <stop offset="50%" stop-color="#0f2647"/>
+      <stop offset="100%" stop-color="#071322"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="ibm" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#054ada"/>
+      <stop offset="100%" stop-color="#0062ff"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="840" fill="url(#bg)"/>
+  
+  <!-- Subtle Grid Accent -->
+  <g opacity="0.07" stroke="#38bdf8" stroke-width="1">
+    <line x1="100" y1="0" x2="100" y2="840"/>
+    <line x1="300" y1="0" x2="300" y2="840"/>
+    <line x1="600" y1="0" x2="600" y2="840"/>
+    <line x1="900" y1="0" x2="900" y2="840"/>
+    <line x1="1100" y1="0" x2="1100" y2="840"/>
+    <line x1="0" y1="150" x2="1200" y2="150"/>
+    <line x1="0" y1="350" x2="1200" y2="350"/>
+    <line x1="0" y1="550" x2="1200" y2="550"/>
+    <line x1="0" y1="750" x2="1200" y2="750"/>
+  </g>
+
+  <!-- Outer Border Frame -->
+  <rect x="40" y="40" width="1120" height="760" rx="16" fill="none" stroke="url(#gold)" stroke-width="2.5" opacity="0.85"/>
+  <rect x="52" y="52" width="1096" height="736" rx="10" fill="none" stroke="#38bdf8" stroke-width="1" stroke-dasharray="8 6" opacity="0.4"/>
+
+  <!-- Corner Ornaments -->
+  <path d="M 60 90 L 60 60 L 90 60" fill="none" stroke="url(#gold)" stroke-width="3"/>
+  <path d="M 1140 90 L 1140 60 L 1110 60" fill="none" stroke="url(#gold)" stroke-width="3"/>
+  <path d="M 60 750 L 60 780 L 90 780" fill="none" stroke="url(#gold)" stroke-width="3"/>
+  <path d="M 1140 750 L 1140 780 L 1110 780" fill="none" stroke="url(#gold)" stroke-width="3"/>
+
+  <!-- Header / Issuer -->
+  <g transform="translate(600, 140)" text-anchor="middle">
+    <rect x="-140" y="-35" width="280" height="42" rx="21" fill="url(#ibm)" filter="url(#shadow)"/>
+    <text y="-9" fill="#ffffff" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="800" font-size="20" letter-spacing="4">IBM SkillsBuild</text>
+    <text y="48" fill="#94a3b8" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="14" font-weight="600" letter-spacing="3">OFFICIAL CERTIFICATE OF COMPLETION</text>
+  </g>
+
+  <!-- Certificate Title -->
+  <g transform="translate(600, 270)" text-anchor="middle">
+    <text fill="#ffffff" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="16" font-weight="500" letter-spacing="2">THIS CREDENTIAL PROUDLY CERTIFIES THAT</text>
+    <text y="70" fill="url(#gold)" font-family="'Plus Jakarta Sans', Georgia, serif" font-size="46" font-weight="800" letter-spacing="1">KIDIST HAILEMICHAEL</text>
+    <line x1="-220" y1="95" x2="220" y2="95" stroke="url(#gold)" stroke-width="2" opacity="0.6"/>
+    <text y="135" fill="#e2e8f0" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="17" font-weight="500">has successfully mastered the comprehensive curriculum for</text>
+    <text y="190" fill="#38bdf8" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="34" font-weight="800">Artificial Intelligence Fundamentals</text>
+  </g>
+
+  <!-- Competencies Box -->
+  <g transform="translate(600, 530)">
+    <rect x="-460" y="0" width="920" height="96" rx="12" fill="#0d1b2a" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="-430" y="32" fill="#38bdf8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">VERIFIED COMPETENCIES:</text>
+    <text x="-430" y="60" fill="#cbd5e1" font-family="'Plus Jakarta Sans', sans-serif" font-size="13.5">
+      Intro to AI • Machine Learning &amp; Deep Learning • NLP • Computer Vision • AI Ethics • IBM Watson Studio
+    </text>
+    <text x="-430" y="82" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="11.5">
+      Credential ID: PLAN-7913EE1DB030 • Verified via skills.yourlearning.ibm.com
+    </text>
+  </g>
+
+  <!-- Footer Seal & Info -->
+  <g transform="translate(600, 715)">
+    <!-- Placeholder note for user -->
+    <rect x="-320" y="-20" width="640" height="40" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <text x="0" y="5" text-anchor="middle" fill="#facc15" font-family="'JetBrains Mono', monospace" font-size="12.5" font-weight="600">
+      📁 Placeholder: Replace at public/certificates/ibm-skillsbuild-ai-fundamentals.png
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="840" viewBox="0 0 1200 840">
+  <defs>
+    <linearGradient id="hr-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1320"/>
+      <stop offset="50%" stop-color="#111c2e"/>
+      <stop offset="100%" stop-color="#0a0f19"/>
+    </linearGradient>
+    <linearGradient id="hr-green" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ea64"/>
+      <stop offset="100%" stop-color="#05b169"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="840" fill="url(#hr-bg)"/>
+  
+  <rect x="40" y="40" width="1120" height="760" rx="14" fill="none" stroke="#05b169" stroke-width="2.5" opacity="0.8"/>
+  <rect x="54" y="54" width="1092" height="732" rx="10" fill="none" stroke="#334155" stroke-width="1" stroke-dasharray="6 6"/>
+
+  <!-- HackerRank Header -->
+  <g transform="translate(600, 140)" text-anchor="middle">
+    <text fill="#00ea64" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-size="28" letter-spacing="1">HackerRank</text>
+    <text y="42" fill="#94a3b8" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="14" font-weight="600" letter-spacing="3">SKILL CERTIFICATION TEST</text>
+  </g>
+
+  <!-- Candidate Details -->
+  <g transform="translate(600, 275)" text-anchor="middle">
+    <text fill="#94a3b8" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="16" letter-spacing="2">THIS ACKNOWLEDGES THAT</text>
+    <text y="68" fill="#ffffff" font-family="'Plus Jakarta Sans', Georgia, serif" font-size="46" font-weight="800">KIDIST HAILEMICHAEL</text>
+    <line x1="-240" y1="92" x2="240" y2="92" stroke="#00ea64" stroke-width="2" opacity="0.6"/>
+    <text y="132" fill="#e2e8f0" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="17">has successfully demonstrated intermediate problem-solving proficiency in</text>
+    <text y="185" fill="#00ea64" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="34" font-weight="800">Problem Solving (Intermediate)</text>
+  </g>
+
+  <!-- Competencies Box -->
+  <g transform="translate(600, 530)">
+    <rect x="-460" y="0" width="920" height="96" rx="12" fill="#15202e" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="-430" y="32" fill="#00ea64" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">ASSESSED SKILLS:</text>
+    <text x="-430" y="60" fill="#e2e8f0" font-family="'Plus Jakarta Sans', sans-serif" font-size="13.5">
+      Data Structures &amp; Algorithms • Space &amp; Time Complexity Analysis • Advanced Algorithmic Thinking
+    </text>
+    <text x="-430" y="82" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="11.5">
+      Certificate: hackerrank.com/certificates/3859380a8945
+    </text>
+  </g>
+
+  <!-- Path instruction banner -->
+  <g transform="translate(600, 715)">
+    <rect x="-330" y="-20" width="660" height="40" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+    <text x="0" y="5" text-anchor="middle" fill="#facc15" font-family="'JetBrains Mono', monospace" font-size="12.5" font-weight="600">
+      📁 Placeholder: Replace at public/certificates/hackerrank-problem-solving-intermediate.png
+    </text>
+  </g>
+</svg>

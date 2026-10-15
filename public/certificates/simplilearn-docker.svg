@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="840" viewBox="0 0 1200 840">
+  <defs>
+    <linearGradient id="sl-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071829"/>
+      <stop offset="50%" stop-color="#0b2847"/>
+      <stop offset="100%" stop-color="#040f1a"/>
+    </linearGradient>
+    <linearGradient id="docker-blue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0db7ed"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="840" fill="url(#sl-bg)"/>
+  
+  <rect x="40" y="40" width="1120" height="760" rx="14" fill="none" stroke="#0db7ed" stroke-width="2.5" opacity="0.8"/>
+  <rect x="54" y="54" width="1092" height="732" rx="10" fill="none" stroke="#f97316" stroke-width="1" stroke-dasharray="6 6" opacity="0.4"/>
+
+  <!-- Simplilearn Header -->
+  <g transform="translate(600, 140)" text-anchor="middle">
+    <text fill="#f97316" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-size="28" letter-spacing="1">simplilearn | SkillUp</text>
+    <text y="42" fill="#94a3b8" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="14" font-weight="600" letter-spacing="3">CERTIFICATE OF ACHIEVEMENT</text>
+  </g>
+
+  <!-- Candidate Details -->
+  <g transform="translate(600, 275)" text-anchor="middle">
+    <text fill="#94a3b8" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="16" letter-spacing="2">CONGRATULATIONS TO</text>
+    <text y="68" fill="#ffffff" font-family="'Plus Jakarta Sans', Georgia, serif" font-size="46" font-weight="800">KIDIST HAILEMICHAEL</text>
+    <line x1="-240" y1="92" x2="240" y2="92" stroke="#0db7ed" stroke-width="2" opacity="0.6"/>
+    <text y="132" fill="#e2e8f0" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="17">for successfully completing the specialized industry training program</text>
+    <text y="185" fill="#38bdf8" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="34" font-weight="800">Docker Fundamentals &amp; Containerization</text>
+  </g>
+
+  <!-- Competencies Box -->
+  <g transform="translate(600, 530)">
+    <rect x="-460" y="0" width="920" height="96" rx="12" fill="#0d2138" stroke="#1e3a5f" stroke-width="1.5"/>
+    <text x="-430" y="32" fill="#38bdf8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">CONTAINER TECHNOLOGIES COVERED:</text>
+    <text x="-430" y="60" fill="#e2e8f0" font-family="'Plus Jakarta Sans', sans-serif" font-size="13.5">
+      Docker Containers • Dockerfile Creation • Images &amp; Registries • Container Networking &amp; Volumes
+    </text>
+    <text x="-430" y="82" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="11.5">
+      Verification: simpli-web.app.link/e/dCZdra3VV6b
+    </text>
+  </g>
+
+  <!-- Path instruction banner -->
+  <g transform="translate(600, 715)">
+    <rect x="-330" y="-20" width="660" height="40" rx="8" fill="#081b2e" stroke="#1e3a5f" stroke-width="1"/>
+    <text x="0" y="5" text-anchor="middle" fill="#facc15" font-family="'JetBrains Mono', monospace" font-size="12.5" font-weight="600">
+      📁 Placeholder: Replace at public/certificates/simplilearn-docker.png
+    </text>
+  </g>
+</svg>

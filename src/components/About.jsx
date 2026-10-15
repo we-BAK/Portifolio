@@ -1,85 +1,92 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import  kid from '../assets/kid-r.png'
+import { Sparkles, Terminal, Database, ShieldCheck, Users, CheckCircle2 } from 'lucide-react';
+import SectionTitle from './SectionTitle';
+import { HIGHLIGHTS } from '../constants/data';
 
-const sectionVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+const ICON_MAP = {
+  Terminal: Terminal,
+  Database: Database,
+  ShieldCheck: ShieldCheck,
+  Users: Users,
 };
 
-const cardVariants = {
-  offscreen: { y: 50, opacity: 0 },
-  onscreen: { y: 0, opacity: 1, transition: { type: 'spring', bounce: 0.4, duration: 1.0 } },
-};
-
-const PROFILE_IMAGE_PLACEHOLDER = "https://placehold.co/400x500/A855F7/ffffff?text=KIDIST+H";
-
-const AboutMe = () => {
+export default function About() {
   return (
-    <motion.section
-      id="about"
-      className="py-20 bg-gray-50 relative"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={sectionVariants}
-    >
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.h2
-          className="text-4xl font-bold text-gray-900 mb-12 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5 }}
-        >
-          Who I Am
-        </motion.h2>
+    <section id="about" className="py-20 md:py-28 relative overflow-hidden">
+      {/* Background soft glow */}
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-cyan-600/10 rounded-full blur-[130px] pointer-events-none -z-10" />
 
-        <div className="flex flex-col md:flex-row-reverse items-center gap-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <SectionTitle
+          eyebrow="Philosophy & Purpose"
+          title="Technology designed to serve people and solve real problems."
+          copy="Guided by the conviction that software finds its greatest value when built with empathy, continuous learning, and meaningful purpose."
+        />
 
-          {/* Image */}
-          <motion.div
-            className="md:w-1/2 relative flex justify-center md:justify-end"
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={{
-              offscreen: { x: 50, opacity: 0 },
-              onscreen: { x: 0, opacity: 1, transition: { duration: 0.8, delay: 0.2 } }
-            }}
-          >
-            <div className="overflow-hidden relative z-10 shadow-2xl shadow-violet-500/30 border-8 border-white p-1 bg-white rounded-xl">
-              <img
-                src={kid}
-                alt="Professional Headshot"
-                className="w-70 h-80 object-cover rounded-lg"
-              />
+        <div className="grid lg:grid-cols-12 gap-10 items-stretch">
+          
+          {/* Main Philosophy Card */}
+          <div className="lg:col-span-7 flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900/95 to-cyan-950/25 border border-cyan-500/30 shadow-2xl relative overflow-hidden">
+            <div className="absolute -right-16 -top-16 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -left-16 -bottom-16 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="relative space-y-6">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 text-xs font-mono font-medium">
+                <Sparkles size={14} className="text-cyan-400" />
+                <span>Core Philosophy</span>
+              </div>
+
+              <blockquote className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-snug">
+                “Learn to build. Build to serve. Serve to make a difference.”
+              </blockquote>
+
+              <p className="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                I believe technology should ultimately serve people. My goal is to keep learning and use what I build to solve meaningful problems and contribute to a better world.
+              </p>
+
+              <div className="pt-4 border-t border-slate-800/80">
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Every system I architect begins by understanding the real human workflows behind it. By combining continuous self-directed learning with clean, resilient engineering, I focus on building software that genuinely improves daily operations and user experiences.
+                </p>
+              </div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Text */}
-          <motion.div
-            className="md:w-1/2"
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={{
-              offscreen: { x: -50, opacity: 0 },
-              onscreen: { x: 0, opacity: 1, transition: { duration: 0.8, delay: 0.2 } }
-            }}
-          >
-            <p className="text-gray-600 text-lg leading-relaxed mb-4">
-            I am Kidist, a recent Computer Science graduate with a strong academic foundation and a deep passion for modern web development            </p>
-            <p className="text-gray-600 text-lg leading-relaxed mb-6">
-            Beyond my degree, I’ve built my skills as a full-stack developer, learning through intensive bootcamps and hands-on projects. I’m adept at transforming complex system requirements into clean, efficient, and user-focused applications.            </p>
+          {/* Right Column: 4 Engineering Pillars */}
+          <div className="lg:col-span-5 flex flex-col justify-between space-y-3.5">
+            <h3 className="text-xs font-mono font-bold tracking-widest uppercase text-slate-400 px-1">
+              CORE ENGINEERING PRACTICES
+            </h3>
 
-            
-          </motion.div>
+            {HIGHLIGHTS.map((item, idx) => {
+              const Icon = ICON_MAP[item.icon] || CheckCircle2;
+              return (
+                <div
+                  key={idx}
+                  className="p-4 sm:p-5 rounded-2xl bg-slate-900/70 border border-slate-800/80 hover:border-cyan-500/30 hover:bg-slate-900 transition-all duration-300"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/15 to-indigo-500/15 border border-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
+                      <Icon size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white text-sm sm:text-base">
+                        {item.title}
+                      </h4>
+                      <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
 
         </div>
-      </div>
-    </motion.section>
-  );
-};
 
-export default AboutMe;
+      </div>
+    </section>
+  );
+}

@@ -1,131 +1,146 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { GraduationCap, Briefcase, BookOpen, CalendarCheck } from 'lucide-react';
+import { GraduationCap, Award, BookOpen, Globe2, CheckCircle2, Star } from 'lucide-react';
+import { EDUCATION, ACHIEVEMENTS, LANGUAGES } from '../constants/data';
+import SectionTitle from './SectionTitle';
 
-const EDUCATION_HISTORY = [
-  {
-    id: 1,
-    period: '2020 - 2025',
-    role: 'B.S. in Computer Science',
-    school: 'Infolink University College',
-    description:
-      'Graduated with a 3.8 GPA. Focused on Data Structures, Algorithms, and Software Engineering principles.',
-    icon: <GraduationCap size={20} />,
-  },
-  {
-    id: 2,
-    period: '2023',
-    role: 'Full Stack Development Bootcamp',
-    school: 'Evangadi (Self-Paced)',
-    description:
-      'Intensive training in Fullstack Development, focusing on building scalable, production-ready applications.',
-    icon: <Briefcase size={20} />,
-  },
-  {
-    id: 3,
-    period: '2024 - Present',
-    role: 'Ongoing Tech Certifications',
-    school: 'Online Courses (Tensorflow)',
-    description:
-    'Currently learning Agentic AI concepts, including autonomous agents, reasoning workflows, and building intelligent systems capable of decision-making and task automation.',    icon: <BookOpen size={20} />,
-  },
-];
-
-const cardVariants = {
-  offscreen: { y: 50, opacity: 0 },
-  onscreen: (custom) => ({
-    y: 0,
-    opacity: 1,
-    transition: { type: 'spring', bounce: 0.4, duration: 1, delay: custom * 0.3 },
-  }),
-};
-
-const Education = () => {
-  const sectionRef = useRef(null);
-
-  // 1. Use useScroll to track the scroll progress of the entire section.
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    // Start tracking when the section's start is 80% of the way down the viewport,
-    // and stop when the section's end is 20% of the way up the viewport.
-    // This defines the range over which the line grows.
-    offset: ['start 0.8', 'end 0.2'],
-  });
-
-  // 2. Use useTransform to map the scroll progress (0 to 1) to the line's scaleY (0 to 1).
-  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
+export default function Education() {
   return (
-    <section id="education" className="py-20 bg-gray-50 relative" ref={sectionRef}>
-      <div className="max-w-4xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center font-manrope">
-          My Learning Journey
-        </h2>
+    <section id="education" className="py-20 md:py-28 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <SectionTitle
+          eyebrow="Academic Background & Achievements"
+          title="Formal Computer Science study and academic honors."
+          copy="B.Sc. in Computer Science with High Distinction (3.82/4.00 GPA, 78% Exit Exam), rigorous coursework, and multilingual communication skills."
+        />
 
-        <div className="relative">
-          {/* Static Gray Timeline Track (Full Height) */}
-          <div className="absolute left-1/2 top-0 h-full w-0.5 bg-gray-300 hidden md:block transform -translate-x-1/2">
-            {/* Animated Violet Line (Scales from top) */}
-            <motion.div
-              className="absolute top-0 w-full h-full bg-violet-600 origin-top"
-              style={{ scaleY }}
-            />
+        <div className="grid lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Main Degree Card */}
+          <div className="lg:col-span-7 space-y-6">
+            {EDUCATION.map((edu) => (
+              <div
+                key={edu.id}
+                className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-slate-800 shadow-xl space-y-6"
+              >
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono font-medium mb-3">
+                      <GraduationCap size={15} />
+                      <span>Bachelor of Science</span>
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                      {edu.degree}
+                    </h3>
+                    <p className="text-slate-300 text-base font-medium mt-1">
+                      {edu.institution}
+                    </p>
+                    <p className="text-xs text-slate-400 font-mono mt-0.5">
+                      {edu.location} · {edu.period}
+                    </p>
+                  </div>
+
+                  {/* High Distinction Badge */}
+                  <div className="p-3.5 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/10 border border-emerald-500/30 text-right">
+                    <p className="text-xs font-mono text-emerald-400 uppercase font-semibold">Honors Status</p>
+                    <p className="text-lg font-extrabold text-white">High Distinction</p>
+                  </div>
+                </div>
+
+                {/* Academic Metric Highlights */}
+                <div className="grid grid-cols-2 gap-4 p-4 rounded-2xl bg-slate-950/70 border border-slate-800">
+                  <div>
+                    <p className="text-xs text-slate-400 font-mono">Cumulative GPA</p>
+                    <p className="text-2xl sm:text-3xl font-bold text-white font-mono mt-0.5">
+                      {edu.gpa}
+                    </p>
+                    <span className="text-[11px] text-emerald-400 font-medium">Top Percentile</span>
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400 font-mono">National Exit Exam</p>
+                    <p className="text-2xl sm:text-3xl font-bold text-cyan-400 font-mono mt-0.5">
+                      {edu.exitExam}
+                    </p>
+                    <span className="text-[11px] text-cyan-300 font-medium">Excellence Score</span>
+                  </div>
+                </div>
+
+                {/* Coursework Grid */}
+                <div>
+                  <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+                    <BookOpen size={15} className="text-cyan-400" />
+                    <span>Key Computer Science Coursework</span>
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {edu.coursework.map((course) => (
+                      <span
+                        key={course}
+                        className="px-3 py-1.5 rounded-xl bg-slate-950 text-slate-300 text-xs font-mono border border-slate-800/80 hover:border-cyan-500/30 transition-colors"
+                      >
+                        {course}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* Languages Card */}
+            <div className="p-6 rounded-3xl bg-slate-900/80 border border-slate-800">
+              <h4 className="text-sm font-bold text-white mb-3 flex items-center gap-2">
+                <Globe2 className="text-cyan-400" size={18} />
+                <span>Languages &amp; Professional Communication</span>
+              </h4>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {LANGUAGES.map((lang) => (
+                  <div
+                    key={lang.name}
+                    className="p-3.5 rounded-xl bg-slate-950/60 border border-white/5 flex items-center justify-between"
+                  >
+                    <span className="font-semibold text-white text-sm">{lang.name}</span>
+                    <span className="text-xs font-mono text-cyan-400">{lang.level}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
 
-          {EDUCATION_HISTORY.map((item, index) => (
-            <motion.div
-              key={item.id}
-              className={`flex items-center w-full my-8 ${
-                index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'
-              }`}
-              initial="offscreen"
-              whileInView="onscreen"
-              custom={index}
-              variants={cardVariants}
-              // Set viewport trigger to ensure a smooth, sequential entry for each card
-              viewport={{ once: true, amount: 0.5 }}
-            >
-              {/* Timeline Content (Desktop) */}
-              <div className={`md:w-5/12 ${index % 2 === 0 ? 'md:pr-10 text-right' : 'md:pl-10 text-left'}`}>
-                <div className="bg-white p-6 rounded-xl shadow-xl border border-gray-200 hover:shadow-violet-200 transition-shadow hidden md:block">
-                  <div className={`flex items-center ${index % 2 === 0 ? 'justify-end' : 'justify-start'}`}>
-                    <span className="text-sm font-medium text-gray-600 font-inter">
-                      <CalendarCheck size={16} className="inline mr-1 text-violet-500" />
-                      {item.period}
-                    </span>
+          {/* Right Column: Achievements List */}
+          <div className="lg:col-span-5 space-y-4">
+            <h3 className="text-xs font-mono font-bold tracking-widest uppercase text-slate-400 px-1 mb-2">
+              NOTABLE ACHIEVEMENTS &amp; RECOGNITION
+            </h3>
+
+            {ACHIEVEMENTS.map((ach) => (
+              <div
+                key={ach.id}
+                className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800/80 hover:border-cyan-500/30 transition-colors"
+              >
+                <div className="flex items-start gap-3.5">
+                  <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 shrink-0 mt-0.5">
+                    <Star size={16} />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mt-2 font-manrope">{item.role}</h3>
-                  <h4 className="text-violet-600 font-medium mb-3 font-inter">{item.school}</h4>
-                  <p className="text-gray-500 text-sm font-inter">{item.description}</p>
+                  <div>
+                    <div className="flex items-center justify-between gap-2">
+                      <h4 className="font-bold text-white text-sm sm:text-base">
+                        {ach.title}
+                      </h4>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-950 text-slate-400 border border-slate-800">
+                        {ach.tag}
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                      {ach.desc}
+                    </p>
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
 
-              {/* Timeline Dot (Desktop) */}
-              <div className="absolute left-1/2 w-10 h-10 rounded-full bg-white border-4 border-violet-600 flex items-center justify-center text-violet-600 transform -translate-x-1/2 z-10 shadow-lg hidden md:flex">
-                {item.icon}
-              </div>
-
-              {/* Mobile Layout */}
-              <div className="absolute left-0 w-6 h-6 rounded-full bg-violet-600 flex items-center justify-center text-white z-10 shadow-lg md:hidden">
-                {item.icon}
-              </div>
-              <div className="md:hidden w-full ml-10">
-                <div className="bg-white p-4 rounded-xl shadow-xl border border-gray-200 hover:shadow-violet-200 transition-shadow">
-                  <span className="text-sm font-medium text-gray-600 mb-1 block font-inter">
-                    <CalendarCheck size={14} className="inline mr-1 text-violet-500" />
-                    {item.period}
-                  </span>
-                  <h3 className="text-lg font-bold text-gray-900 font-manrope">{item.role}</h3>
-                  <h4 className="text-violet-600 font-medium mb-2 font-inter">{item.school}</h4>
-                  <p className="text-gray-500 text-sm font-inter">{item.description}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
         </div>
+
       </div>
     </section>
   );
-};
-
-export default Education;
+}
