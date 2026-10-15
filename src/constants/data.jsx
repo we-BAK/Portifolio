@@ -2,7 +2,7 @@ import ALP from '../assets/Autistic.png';
 import KL from '../assets/KidsLearn.png';
 import water from '../assets/water.png';
 import parishSvg from '../assets/parish-management.png';
-import serverSvg from '../assets/server-database.svg';
+import serverSvg from '../assets/server-database.png';
 
 import ibmCert from '../assets/certificates/ibm-skillsbuild-ai-fundamentals.png';
 import fccCert from '../assets/certificates/freecodecamp-scientific-computing-python.png';
@@ -259,24 +259,24 @@ export const PROJECTS = [
   },
   {
     id: 3,
-    title: 'Parish Management System',
+    title: 'Sophia — Spiritual Community Management & Telegram Bot Platform',
     role: 'Full-Stack Developer',
     period: '2026',
     category: 'Enterprise & Database',
-    tagline: 'Enterprise church administration platform powered by ASP.NET MVC and MySQL.',
+    tagline: 'Modular ASP.NET Core & Telegram bot platform with normalized relational schema and concurrency-safe appointment scheduling.',
     description:
-      'Architected and implemented a secure church management platform using ASP.NET MVC and MySQL. The system organizes congregation records, sacrament documentation, clergy scheduling, and financial reporting under strict role-based access boundaries.',
+      'Architected and implemented Sophia, a spiritual community management platform and multi-layered C# Telegram bot service powered by ASP.NET Core and Entity Framework Core. Engineered specialized handler pipelines, normalized complex relational schemas with custom SQL migration scripts, and enforced state-driven booking workflows with strict concurrency controls.',
     features: [
-      'Multi-tier RBAC for Priests, Parish Members, Accountants, and General Administrators.',
-      'Relational database structures normalized in MySQL (InnoDB) with transactional safety.',
-      'Sacrament registration (Baptisms, Weddings, Memorials) with verifiable record generation.',
-      'Structured financial contributions and annual donation reporting modules.',
+      'Modular Bot Architecture: Engineered a scalable, multi-layered C# Telegram bot service using ASP.NET Core and Telegram.Bot, decomposing monolithic flows into specialized handlers (TelegramRegistrationHandler, TelegramPriestHandler, TelegramMenuHandler) with robust global namespace aliasing and validation helpers.',
+      'Database Migration & Schema Normalization: Refactored complex relational database models using Entity Framework Core and custom SQL scripts—optimizing the Users and SpiritualChildren schemas, deprecating legacy columns in favor of explicit BaptismName structures, and resolving concurrency conflicts.',
+      'Appointment Scheduling & Concurrency Control: Designed and implemented a robust scheduling system featuring decoupled PriestAvailableSlot and SpiritualChildAppointment tables, enforcing unique constraints and state workflows (Pending -> Confirmed / Cancelled) to prevent double-booking.',
+      'Secure Role-Based & State-Driven Workflows: Developed secure multi-step registration and priest approval loops, managing user state transitions (RegistrationState), automated notification dispatching, and secure credential handling with automated background validation.',
     ],
-    tags: ['ASP.NET MVC', 'C#', 'MySQL', 'Relational DB', 'RBAC', 'Enterprise'],
+    tags: ['ASP.NET Core', 'C#', 'Telegram.Bot', 'Entity Framework Core', 'Relational DB', 'RBAC', 'Concurrency Control'],
     link: 'http://sophia.runasp.net/',
     github: 'https://github.com/we-BAK',
     image: parishSvg,
-    badge: 'ASP.NET MVC Architecture',
+    badge: 'ASP.NET Core & Telegram Bot',
   },
   {
     id: 4,
@@ -301,24 +301,30 @@ export const PROJECTS = [
   },
   {
     id: 5,
-    title: 'Server & Database Infrastructure Projects',
-    role: 'Backend Developer',
-    period: '2024 – 2025',
-    category: 'Backend & Systems',
-    tagline: 'Resilient Node.js microservices and normalized MySQL schemas hosted on Ubuntu Linux.',
+    title: 'EOTC Youth Ministry Question Management System',
+    role: 'Full-Stack Developer',
+    period: '2025 – 2026',
+    category: 'Full-Stack & Systems',
+    tagline: 'Full-stack platform collecting youth questions via Telegram bot with a React review and program curation dashboard.',
     description:
-      'Engineered backend services and relational databases running on Ubuntu Linux environments. Implemented secure RESTful APIs, authentication middleware, rate limiting, and complex SQL/PL-SQL stored procedures with ACID transaction guarantees.',
+      'Developed a full-stack platform that collects religious questions submitted by youth through a Telegram bot and empowers authorized ministry staff to organize, categorize, review, and curate questions for physical youth program discussions.',
     features: [
-      'Configured Ubuntu Linux development and production environments with PM2 process monitoring.',
-      'Built RESTful API services using Node.js and Express with JWT authentication.',
-      'Engineered normalized MySQL databases (3NF) with indexing and PL/SQL stored procedures.',
-      'Rigorous API testing using Postman automated test suites and validation schemas.',
+      'Telegram Bot Integration: Built a Telegram bot that securely receives youth-submitted questions and stores them in a centralized PostgreSQL database for later review.',
+      'Role-Based Access Control (RBAC): Implemented a permission-based access system with Super Admin, Admin, Reviewer, and Program Coordinator roles.',
+      'User Management: Developed administrative functionality for creating user accounts, assigning roles, and activating or deactivating accounts.',
+      'Question Lifecycle Management: Designed workflows to categorize, group, assign, and track questions through program selection and outcomes, including answered and deferred questions.',
+      'Program Management: Built functionality for organizing physical youth programs and associating questions with planned discussions and recorded outcomes.',
+      'Database Design: Designed a relational PostgreSQL database using Supabase to manage users, roles, permissions, questions, categories, programs, and audit records.',
+      'Secure Backend APIs: Developed RESTful APIs using Node.js and Express.js to handle application operations and enforce permission checks.',
+      'Authentication & Security: Integrated Supabase Authentication and account-status checks to control access to protected application features.',
+      'Administrative Dashboard: Built a React-based management interface for authorized staff to manage users, questions, categories, and programs.',
+      'Deployment: Deployed the backend API to Render and configured environment-based settings for deployment.',
     ],
-    tags: ['Ubuntu Linux', 'Node.js', 'Express.js', 'MySQL', 'PL/SQL', 'Postman', 'REST APIs'],
-    link: '',
+    tags: ['React', 'JavaScript', 'Node.js', 'Express.js', 'PostgreSQL', 'Supabase', 'Telegram Bot API', 'RBAC', 'Render'],
+    link: 'https://youth-question.vercel.app/',
     github: 'https://github.com/we-BAK',
     image: serverSvg,
-    badge: 'Backend & DevOps',
+    badge: 'Full-Stack & Telegram Bot',
   },
 ];
 

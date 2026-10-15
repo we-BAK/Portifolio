@@ -1,18 +1,10 @@
 import { useState } from 'react';
-import { ExternalLink, Check, Copy, ShieldCheck, Award, FileCode, CheckCircle2, X } from 'lucide-react';
+import { ExternalLink, ShieldCheck, Award, FileCode, CheckCircle2, X } from 'lucide-react';
 import { CERTIFICATES } from '../constants/data';
 import SectionTitle from './SectionTitle';
 
 export default function Certificates() {
   const [activeCert, setActiveCert] = useState(null);
-  const [copiedPath, setCopiedPath] = useState(null);
-
-  const handleCopy = (path, e) => {
-    e.stopPropagation();
-    navigator.clipboard.writeText(path);
-    setCopiedPath(path);
-    setTimeout(() => setCopiedPath(null), 2500);
-  };
 
   return (
     <section id="certificates" className="py-20 md:py-28 relative">
@@ -103,50 +95,27 @@ export default function Certificates() {
                 </div>
               </div>
 
-              {/* Bottom False Path & Action */}
-              <div className="p-6 pt-0 space-y-3">
-                {/* File Path Pill */}
-                <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800/80 flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-1.5 text-[11px] font-mono text-slate-400 truncate">
-                    <Folder size={12} className="text-cyan-400 shrink-0" />
-                    <span className="truncate">{cert.folderPath}</span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={(e) => handleCopy(cert.folderPath, e)}
-                    className="p-1 text-slate-400 hover:text-white rounded bg-slate-900 hover:bg-slate-800 shrink-0"
-                    title="Copy relative file path"
+              {/* Bottom Actions */}
+              <div className="p-6 pt-0 border-t border-slate-800/80 mt-4 flex items-center justify-between">
+                {cert.verifyUrl ? (
+                  <a
+                    href={cert.verifyUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300 hover:underline"
                   >
-                    {copiedPath === cert.folderPath ? (
-                      <Check size={12} className="text-emerald-400" />
-                    ) : (
-                      <Copy size={12} />
-                    )}
-                  </button>
-                </div>
-
-                {/* Card Actions */}
-                <div className="flex items-center justify-between pt-1">
-                  {cert.verifyUrl ? (
-                    <a
-                      href={cert.verifyUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300 hover:underline"
-                    >
-                      <ExternalLink size={13} /> Verify Credential
-                    </a>
-                  ) : (
-                    <span className="text-xs font-mono text-emerald-400">
-                      Community Recognition
-                    </span>
-                  )}
-
-                  <span className="text-xs font-medium text-slate-400 group-hover:text-white transition-colors">
-                    Preview Card →
+                    <ExternalLink size={13} /> Verify Credential
+                  </a>
+                ) : (
+                  <span className="text-xs font-mono text-emerald-400">
+                    Community Recognition
                   </span>
-                </div>
+                )}
+
+                <span className="text-xs font-medium text-slate-400 group-hover:text-white transition-colors">
+                  Preview Card →
+                </span>
               </div>
             </div>
           ))}
@@ -222,29 +191,8 @@ export default function Certificates() {
               </div>
             </div>
 
-            {/* File Replacement Guide */}
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-              <p className="text-xs font-mono text-amber-400 font-semibold flex items-center gap-1.5">
-                <span>📁 File Replacement Location:</span>
-              </p>
-              <div className="flex items-center justify-between gap-2 p-2 rounded bg-slate-900 border border-slate-800 font-mono text-xs text-slate-300">
-                <span>{activeCert.folderPath}</span>
-                <button
-                  type="button"
-                  onClick={(e) => handleCopy(activeCert.folderPath, e)}
-                  className="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] text-cyan-300 flex items-center gap-1"
-                >
-                  {copiedPath === activeCert.folderPath ? <Check size={12} /> : <Copy size={12} />}
-                  Copy Path
-                </button>
-              </div>
-              <p className="text-[11px] text-slate-400">
-                To replace this placeholder with your official certificate scan, place your file in <code className="text-cyan-300">public/certificates/{activeCert.folderPath.split('/').pop()}</code>.
-              </p>
-            </div>
-
             {/* Footer Buttons */}
-            <div className="pt-2 border-t border-slate-800 flex flex-wrap justify-between items-center gap-3">
+            <div className="pt-4 border-t border-slate-800 flex flex-wrap justify-between items-center gap-3">
               {activeCert.verifyUrl ? (
                 <a
                   href={activeCert.verifyUrl}

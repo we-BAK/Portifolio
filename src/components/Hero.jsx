@@ -1,9 +1,93 @@
-import { ArrowDownRight, FileText, Send, MapPin, Github, Linkedin, Mail, Phone, ExternalLink, Code2, Database, Layers } from 'lucide-react';
-import portrait from '../assets/kid-r.png';
+import { useState, useEffect } from 'react';
+import { ArrowDownRight, FileText, Send, MapPin, Github, Linkedin, Mail, Phone, Code2, Database, Terminal, Sparkles, CheckCircle2 } from 'lucide-react';
 import { PROFILE, STATS } from '../constants/data';
 import { scrollToId } from '../utils/scroll';
 
+const TYPING_PHRASES = [
+  'Kidist Hailemichael',
+  'Full-Stack Developer',
+  'ASP.NET & Node.js Engineer',
+  'Database Architect',
+  'Passionate Problem Solver',
+];
+
+const TERMINAL_FOCUS_PHRASES = [
+  'Architecting scalable, database-driven web platforms...',
+  'Designing normalized MySQL & PL/SQL schemas...',
+  'Building secure REST APIs with multi-tier RBAC...',
+  'Delivering clean React interfaces from user requirements...',
+  'Living the motto: "Learn to build. Build to serve."',
+];
+
 export default function Hero({ onOpenResume }) {
+  // Main title typewriter state
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  // Terminal typewriter state
+  const [terminalIndex, setTerminalIndex] = useState(0);
+  const [terminalText, setTerminalText] = useState('');
+  const [isTerminalDeleting, setIsTerminalDeleting] = useState(false);
+
+  // Main Title Typing Effect
+  useEffect(() => {
+    const currentPhrase = TYPING_PHRASES[phraseIndex];
+    let timer;
+
+    if (!isDeleting) {
+      if (displayText.length < currentPhrase.length) {
+        timer = setTimeout(() => {
+          setDisplayText(currentPhrase.slice(0, displayText.length + 1));
+        }, 85);
+      } else {
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, 2200);
+      }
+    } else {
+      if (displayText.length > 0) {
+        timer = setTimeout(() => {
+          setDisplayText(currentPhrase.slice(0, displayText.length - 1));
+        }, 45);
+      } else {
+        setIsDeleting(false);
+        setPhraseIndex((prev) => (prev + 1) % TYPING_PHRASES.length);
+      }
+    }
+
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, phraseIndex]);
+
+  // Terminal Focus Typing Effect
+  useEffect(() => {
+    const currentFocus = TERMINAL_FOCUS_PHRASES[terminalIndex];
+    let timer;
+
+    if (!isTerminalDeleting) {
+      if (terminalText.length < currentFocus.length) {
+        timer = setTimeout(() => {
+          setTerminalText(currentFocus.slice(0, terminalText.length + 1));
+        }, 60);
+      } else {
+        timer = setTimeout(() => {
+          setIsTerminalDeleting(true);
+        }, 2500);
+      }
+    } else {
+      if (terminalText.length > 0) {
+        timer = setTimeout(() => {
+          setTerminalText(currentFocus.slice(0, terminalText.length - 1));
+        }, 30);
+      } else {
+        setIsTerminalDeleting(false);
+        setTerminalIndex((prev) => (prev + 1) % TERMINAL_FOCUS_PHRASES.length);
+      }
+    }
+
+    return () => clearTimeout(timer);
+  }, [terminalText, isTerminalDeleting, terminalIndex]);
+
   return (
     <section id="hero" className="relative min-h-screen pt-28 pb-16 lg:pt-36 lg:pb-24 flex items-center overflow-hidden">
       {/* Background Glow Mesh */}
@@ -19,16 +103,17 @@ export default function Hero({ onOpenResume }) {
           
           {/* Left Column: Bio & Value Proposition */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            {/* Name & Titles */}
+            {/* Name & Dynamic Typing Titles */}
             <div>
               <p className="text-xs sm:text-sm font-mono tracking-widest uppercase text-cyan-400 font-semibold mb-2">
                 FULL-STACK &amp; WEB DEVELOPER · HAWASSA, ETHIOPIA
               </p>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08]">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12] min-h-[1.25em]">
                 Hi, I'm{' '}
                 <span className="gradient-text-cyan">
-                  {PROFILE.name}
+                  {displayText}
                 </span>
+                <span className="inline-block w-1 h-7 sm:h-9 lg:h-11 bg-cyan-400 ml-1.5 animate-pulse align-middle rounded-full" />
               </h1>
             </div>
 
@@ -142,46 +227,122 @@ export default function Hero({ onOpenResume }) {
 
           </div>
 
-          {/* Right Column: Portrait Card with Glassmorphic Floating Badges */}
-          <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-sm sm:max-w-md">
+          {/* Right Column: Interactive Code Terminal Card (Replaces Portrait Photo) */}
+          <div className="lg:col-span-5 flex justify-center w-full">
+            <div className="relative w-full max-w-lg">
               
-              {/* Glowing Frame Behind Image */}
-              <div className="absolute -inset-1.5 bg-gradient-to-tr from-cyan-500 via-indigo-500 to-emerald-400 rounded-3xl blur-xl opacity-35 group-hover:opacity-60 transition duration-1000 -z-10" />
+              {/* Glowing Frame Behind Terminal */}
+              <div className="absolute -inset-1.5 bg-gradient-to-tr from-cyan-500 via-indigo-500 to-emerald-400 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition duration-1000 -z-10" />
 
-              {/* Main Card */}
-              <div className="relative rounded-3xl overflow-hidden bg-slate-900 border border-slate-700/60 shadow-2xl p-4 sm:p-5">
-                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-b from-slate-800/80 to-slate-950 flex items-end justify-center">
-                  <img
-                    src={portrait}
-                    alt={`${PROFILE.name} — Software Developer`}
-                    className="w-full h-full object-cover object-top hover:scale-[1.02] transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
-                  
-                  {/* Bottom Tag inside photo */}
-                  <div className="absolute bottom-3 inset-x-3 p-3 rounded-xl bg-slate-900/85 backdrop-blur-md border border-white/10 flex items-center justify-between">
-                    <div>
-                      <p className="text-xs font-bold text-white">{PROFILE.name}</p>
-                      <p className="text-[11px] text-cyan-400 font-mono">B.Sc. Computer Science (3.82 GPA)</p>
-                    </div>
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                      Verified
+              {/* Main Terminal Window */}
+              <div className="relative rounded-3xl overflow-hidden bg-slate-950/95 border border-slate-700/70 shadow-2xl backdrop-blur-xl">
+                
+                {/* Terminal Header Bar */}
+                <div className="px-4 py-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
+                    <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
+                    <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
+                    <span className="text-xs font-mono text-slate-400 ml-2 font-medium flex items-center gap-1.5">
+                      <Code2 size={13} className="text-cyan-400" />
+                      developer.profile.ts
                     </span>
                   </div>
+
+                  <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-mono">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>active</span>
+                  </div>
                 </div>
+
+                {/* Code Terminal Content */}
+                <div className="p-5 sm:p-6 font-mono text-xs sm:text-[13px] leading-relaxed text-slate-300 overflow-x-auto space-y-2.5">
+                  <div className="text-slate-500 italic select-none">
+                    // Scalable, database-driven systems
+                  </div>
+
+                  <div>
+                    <span className="text-indigo-400 font-bold">const</span>{' '}
+                    <span className="text-cyan-300 font-bold">engineer</span>{' '}
+                    <span className="text-slate-400">=</span>{' '}
+                    <span className="text-slate-400">{'{'}</span>
+                  </div>
+
+                  <div className="pl-4 space-y-1">
+                    <div>
+                      <span className="text-slate-400">name:</span>{' '}
+                      <span className="text-emerald-300 font-semibold">'{PROFILE.name}'</span>
+                      <span className="text-slate-400">,</span>
+                    </div>
+
+                    <div>
+                      <span className="text-slate-400">role:</span>{' '}
+                      <span className="text-cyan-300">'{PROFILE.title}'</span>
+                      <span className="text-slate-400">,</span>
+                    </div>
+
+                    <div>
+                      <span className="text-slate-400">location:</span>{' '}
+                      <span className="text-slate-300">'{PROFILE.location}'</span>
+                      <span className="text-slate-400">,</span>
+                    </div>
+
+                    <div>
+                      <span className="text-slate-400">education:</span>{' '}
+                      <span className="text-amber-300">'B.Sc. Computer Science (3.82 GPA)'</span>
+                      <span className="text-slate-400">,</span>
+                    </div>
+
+                    <div>
+                      <span className="text-slate-400">stack:</span>{' '}
+                      <span className="text-slate-400">[</span>
+                      <span className="text-cyan-300">'React'</span>
+                      <span className="text-slate-400">, </span>
+                      <span className="text-cyan-300">'Node.js'</span>
+                      <span className="text-slate-400">, </span>
+                      <span className="text-cyan-300">'ASP.NET'</span>
+                      <span className="text-slate-400">, </span>
+                      <span className="text-cyan-300">'MySQL'</span>
+                      <span className="text-slate-400">],</span>
+                    </div>
+
+                    <div>
+                      <span className="text-slate-400">motto:</span>{' '}
+                      <span className="text-emerald-300 italic">"Learn to build. Build to serve."</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="text-slate-400">{'}'};</span>
+                  </div>
+
+                  {/* Live Interactive Console Output Line with second typewriter */}
+                  <div className="pt-3 border-t border-slate-800/80 space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-cyan-400 font-semibold text-xs">
+                      <span>&gt;</span>
+                      <span className="text-slate-300">kidist.getCurrentMission()</span>
+                    </div>
+                    <div className="p-2.5 rounded-xl bg-slate-900/90 border border-cyan-500/20 text-cyan-300 text-xs flex items-center justify-between min-h-[38px]">
+                      <div className="flex items-center gap-2 truncate">
+                        <Terminal size={14} className="text-cyan-400 shrink-0" />
+                        <span className="truncate">{terminalText}</span>
+                      </div>
+                      <span className="w-1.5 h-3.5 bg-cyan-400 inline-block animate-pulse shrink-0 ml-1" />
+                    </div>
+                  </div>
+                </div>
+
               </div>
 
-              {/* Floating Tech Badge 1: Top Right */}
-              <div className="absolute -top-4 -right-4 px-3.5 py-2 rounded-xl bg-slate-900/90 backdrop-blur-md border border-cyan-500/30 shadow-lg flex items-center gap-2 text-xs font-mono text-cyan-300 hidden sm:flex">
-                <Code2 size={15} className="text-cyan-400" />
-                <span>React + Node.js</span>
+              {/* Floating Tech Badges */}
+              <div className="absolute -top-3 -right-3 px-3 py-1.5 rounded-xl bg-slate-900/95 backdrop-blur-md border border-cyan-500/30 shadow-lg flex items-center gap-1.5 text-xs font-mono text-cyan-300 hidden sm:flex">
+                <Code2 size={14} className="text-cyan-400" />
+                <span>Full-Stack Verified</span>
               </div>
 
-              {/* Floating Tech Badge 2: Bottom Left */}
-              <div className="absolute -bottom-4 -left-4 px-3.5 py-2 rounded-xl bg-slate-900/90 backdrop-blur-md border border-indigo-500/30 shadow-lg flex items-center gap-2 text-xs font-mono text-indigo-300 hidden sm:flex">
-                <Database size={15} className="text-indigo-400" />
-                <span>ASP.NET &amp; MySQL</span>
+              <div className="absolute -bottom-3 -left-3 px-3 py-1.5 rounded-xl bg-slate-900/95 backdrop-blur-md border border-indigo-500/30 shadow-lg flex items-center gap-1.5 text-xs font-mono text-indigo-300 hidden sm:flex">
+                <Database size={14} className="text-indigo-400" />
+                <span>Relational DB &amp; APIs</span>
               </div>
 
             </div>
